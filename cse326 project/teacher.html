@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduTrack | Teacher Dashboard</title>
+  <link rel="stylesheet" href="https://unpkg.com/lucide-static@latest/font/lucide.css">
+  <style>
+    :root {
+      --mint:#CAF4F4; --cream:#FCFFE9; --yellow:#FFF2CC; --pink:#FDE0D9;
+      --green:#CAEFD1; --red:#830000; --bright-red:#BC0202;
+      --text:#263238; --muted:#718087; --white:#FFFFFF; --line:#EAEAEA;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:Arial,sans-serif;background:var(--cream);color:var(--text)}
+    button,input,select,textarea{font:inherit}
+    button{cursor:pointer}
+    .dashboard{display:flex;min-height:100vh}
+    .sidebar{width:245px;flex-shrink:0;padding:30px 18px;background:var(--mint);display:flex;flex-direction:column}
+    .brand{display:flex;align-items:center;gap:10px;margin:8px 5px;color:var(--red);font-size:25px;font-weight:bold}
+    .brand i{font-size:29px}
+    .brand-subtitle{margin:0 5px 38px;color:var(--muted);font-size:14px}
+    .nav-link{display:flex;align-items:center;gap:13px;padding:14px;margin-bottom:8px;border-radius:10px;text-decoration:none;color:var(--text);transition:.2s}
+    .nav-link i{font-size:20px}
+    .nav-link:hover,.nav-link.active{background:var(--red);color:var(--white)}
+    .logout{margin-top:auto;padding-top:20px;border-top:1px solid #A8DCDC}
+    .main-content{flex:1;min-width:0;padding:35px}
+    .topbar{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:30px}
+    h1{color:var(--red);font-size:32px;margin-bottom:10px}
+    .subtitle{color:var(--muted);line-height:1.5}
+    .profile{display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:12px;background:var(--white);white-space:nowrap}
+    .profile i{color:var(--red);font-size:22px}
+    .primary-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:9px;padding:12px 16px;background:var(--red);color:white;font-weight:bold;transition:.2s}
+    .primary-btn:hover{background:var(--bright-red)}
+    .summary-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-bottom:25px}
+    .summary-card{padding:22px;border:1px solid var(--line);border-radius:15px}
+    .total-card{background:var(--mint)}.students-card{background:var(--yellow)}.review-card{background:var(--pink)}.graded-card{background:var(--green)}
+    .card-icon{display:inline-flex;align-items:center;justify-content:center;width:45px;height:45px;margin-bottom:18px;border-radius:50%;background:rgba(255,255,255,.7);color:var(--red);font-size:23px}
+    .card-label{margin-bottom:12px;font-size:14px}.card-number{color:var(--red);font-size:30px;font-weight:bold}
+    .content-grid{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(260px,1fr);gap:22px;align-items:start}
+    .panel{padding:24px;background:var(--white);border:1px solid #eee;border-radius:16px;min-width:0}
+    .panel-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:20px}
+    h2{color:var(--red);font-size:22px}
+    h3{font-size:16px;color:var(--text)}
+    .muted{color:var(--muted);font-size:13px}
+    .tools{display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin-bottom:18px}
+    .search-box{flex:1;min-width:180px;padding:12px 14px;border:1px solid #dadfe2;border-radius:9px;outline:none}
+    .search-box:focus{border-color:var(--red)}
+    .filter-btn{padding:10px 13px;border:1px solid #e6e8ea;border-radius:9px;background:#f7f8f9;color:var(--text)}
+    .filter-btn:hover,.filter-btn.active{background:var(--red);color:white}
+    .table-wrapper{overflow-x:auto}
+    table{width:100%;min-width:650px;border-collapse:collapse}
+    th{padding:14px 11px;background:#f3f6f7;color:#526168;text-align:left;font-size:12px}
+    td{padding:15px 11px;border-bottom:1px solid #eee;font-size:13px;vertical-align:middle}
+    tbody tr:hover{background:#fffef7}
+    .assignment{display:flex;align-items:center;gap:10px;min-width:160px}
+    .assignment-icon{display:flex;align-items:center;justify-content:center;flex-shrink:0;width:39px;height:39px;border-radius:11px;background:var(--mint);color:var(--red);font-size:19px}
+    .assignment-name{font-weight:bold;margin-bottom:5px}.assignment-code{color:var(--muted);font-size:11px}
+    .status{display:inline-flex;align-items:center;gap:5px;padding:7px 10px;border-radius:20px;font-size:11px;font-weight:bold;white-space:nowrap}
+    .status.review{background:var(--pink);color:var(--red)}.status.active{background:var(--green);color:#176b3a}.status.draft{background:var(--yellow);color:#805500}
+    .small-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 10px;border:1px solid var(--red);border-radius:8px;background:white;color:var(--red);font-size:12px;white-space:nowrap}
+    .small-btn:hover{background:var(--red);color:white}
+    .submission-list{display:flex;flex-direction:column;gap:14px}
+    .submission{display:flex;align-items:center;gap:11px;padding:13px;border:1px solid #eee;border-radius:12px}
+    .avatar{display:flex;align-items:center;justify-content:center;width:42px;height:42px;flex-shrink:0;border-radius:50%;background:var(--mint);color:var(--red);font-weight:bold}
+    .student-info{min-width:0;flex:1}.student-info strong{display:block;font-size:13px;margin-bottom:5px}.student-info span{display:block;color:var(--muted);font-size:11px;line-height:1.4}
+    .review-btn{border:0;border-radius:8px;background:var(--red);color:white;padding:9px 10px;font-size:12px}
+    .review-btn:hover{background:var(--bright-red)}
+    .progress-wrap{margin-top:23px;padding-top:20px;border-top:1px solid #eee}
+    .progress-head{display:flex;justify-content:space-between;gap:10px;margin-bottom:10px;font-size:13px}
+    .progress-track{height:9px;background:#edf0f0;border-radius:20px;overflow:hidden}
+    .progress-bar{height:100%;width:72%;background:var(--red);border-radius:20px}
+    .empty-message{display:none;padding:25px;text-align:center;color:var(--muted)}
+    .notice{display:none;margin-bottom:18px;padding:13px 15px;border-radius:10px;background:var(--green);color:#176b3a;font-size:13px}
+    @media(max-width:1100px){.summary-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.content-grid{grid-template-columns:1fr}.main-content{padding:25px}}
+    @media(max-width:700px){.dashboard{flex-direction:column}.sidebar{width:100%;padding:18px}.brand-subtitle{margin-bottom:18px}.nav-links{display:flex;flex-wrap:wrap;gap:5px}.nav-link{padding:10px;margin:0}.logout{margin-top:15px}.main-content{padding:20px 14px}.topbar,.panel-heading{align-items:flex-start;flex-direction:column}h1{font-size:26px}.summary-cards{gap:10px}.summary-card{padding:15px}.panel{padding:15px}.card-number{font-size:26px}}
+  </style>
+</head>
+<body>
+<div class="dashboard">
+  <aside class="sidebar">
+    <div class="brand"><i class="icon-graduation-cap"></i><span>EduTrack</span></div>
+    <p class="brand-subtitle">Teacher Portal</p>
+    <nav class="nav-links">
+      <a href="#dashboard" class="nav-link active"><i class="icon-layout-dashboard"></i><span>Dashboard</span></a>
+      <a href="#assignments" class="nav-link"><i class="icon-clipboard-list"></i><span>Assignments</span></a>
+      <a href="#submissions" class="nav-link"><i class="icon-file-check"></i><span>Submissions</span></a>
+      <a href="#students" class="nav-link"><i class="icon-users-round"></i><span>Students</span></a>
+      <a href="#deadlines" class="nav-link"><i class="icon-calendar-clock"></i><span>Deadlines</span></a>
+    </nav>
+    <div class="logout"><a href="index.html" class="nav-link"><i class="icon-log-out"></i><span>Logout</span></a></div>
+  </aside>
+
+  <main class="main-content" id="dashboard">
+    <header class="topbar">
+      <div>
+        <h1>Welcome back, Teacher!</h1>
+        <p class="subtitle">Here’s your class overview and the work that needs your attention.</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <button class="primary-btn" id="createBtn"><i class="icon-plus"></i> Create Assignment</button>
+        <div class="profile"><i class="icon-circle-user-round"></i><span>Teacher Portal</span><i class="icon-chevron-down"></i></div>
+      </div>
+    </header>
+
+    <div class="notice" id="notice" role="status"></div>
+
+    <section class="summary-cards" aria-label="Teaching summary">
+      <div class="summary-card total-card"><div class="card-icon"><i class="icon-clipboard-list"></i></div><p class="card-label">Total Assignments</p><p class="card-number" id="totalCount">8</p></div>
+      <div class="summary-card students-card"><div class="card-icon"><i class="icon-users-round"></i></div><p class="card-label">Students Enrolled</p><p class="card-number">126</p></div>
+      <div class="summary-card review-card"><div class="card-icon"><i class="icon-clock-3"></i></div><p class="card-label">Pending Reviews</p><p class="card-number" id="reviewCount">12</p></div>
+      <div class="summary-card graded-card"><div class="card-icon"><i class="icon-circle-check"></i></div><p class="card-label">Reviewed</p><p class="card-number" id="gradedCount">34</p></div>
+    </section>
+
+    <div class="content-grid">
+      <section class="panel" id="assignments">
+        <div class="panel-heading"><div><h2>Assignment Overview</h2><p class="muted" style="margin-top:6px">Manage coursework across your classes.</p></div><button class="small-btn" id="viewAllBtn"><i class="icon-list-filter"></i> View all</button></div>
+        <div class="tools">
+          <input class="search-box" id="searchInput" type="search" placeholder="Search assignments or courses..." aria-label="Search assignments">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="active">Active</button>
+          <button class="filter-btn" data-filter="review">Needs review</button>
+          <button class="filter-btn" data-filter="draft">Draft</button>
+        </div>
+        <div class="table-wrapper">
+          <table>
+            <thead><tr><th>Assignment</th><th>Course</th><th>Due Date</th><th>Submissions</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody id="assignmentList">
+              <tr data-status="review"><td><div class="assignment"><div class="assignment-icon"><i class="icon-code"></i></div><div><p class="assignment-name">Python Basics</p><span class="assignment-code">ASG-101</span></div></div></td><td>Python Programming</td><td>24 Oct 2026</td><td>18 / 32</td><td><span class="status review">Needs review</span></td><td><button class="small-btn review-assignment">Review</button></td></tr>
+              <tr data-status="active"><td><div class="assignmes="assignment"><div class="assignment-icon"><i class="icon-code-xml"></i></div><div><p class="assignment-name">Personal Portfolio</p><span class="assignment-code">ASG-102</span></div></div></td><td>Web Development</td><td>26 Oct 2026</td><td>27 / 30</td><td><span class="status active">Active</span></td><td><button class="small-btn review-assignment">Details</button></td></tr>
+              <tr data-status="review"><td><div clasnt"><div class="assignment-icon"><i class="icon-database"></i></div><div><p class="assignment-name">Database Schema</p><span class="assignment-code">ASG-103</span></div></div></td><td>Database Systems</td><td>28 Oct 2026</td><td>12 / 28</td><td><span class="status review">Needs review</span></td><td><button class="small-btn review-assignment">Review</button></td></tr>
+              <tr data-status="active"><td><div class="assignment"><div class="assignment-icon"><i class="icon-network"></i></div><div><p class="assignment-name">Network Report</p><span class="assignment-code">ASG-104</span></div></div></td><td>Computer Networks</td><td>30 Oct 2026</td><td>21 / 36</td><td><span class="status active">Active</span></td><td><button class="small-btn review-assignment">Details</button></td></tr>
+              <tr data-status="draft"><td><div class="assignment"><div class="assignment-icon"><i class="icon-monitor"></i></div><div><p class="assignment-name">Process Scheduling</p><span class="assignment-code">ASG-105</span></div></div></td><td>Operating Systems</td><td>05 Nov 2026</td><td>—</td><td><span class="status draft">Draft</span></td><td><button class="small-btn review-assignment">Edit</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="empty-message" id="emptyMessage"><i class="icon-search-x"></i> No assignments match your search.</p>
+      </section>
+
+      <section class="panel" id="submissions">
+        <div class="panel-heading"><div><h2>Recent Submissions</h2><p class="muted" style="margin-top:6px">Student work waiting for your review.</p></div></div>
+        <div class="submission-list" id="submissionList">
+          <div class="submission"><div class="avatar">AS</div><div class="student-info"><strong>Aarav Sharma</strong><span>Python Basics · Submitted 2h ago</span></div><button class="review-btn">Review</button></div>
+          <div class="submission"><div class="avatar">PK</div><div class="student-info"><strong>Priya Kapoor</strong><span>Database Schema · Submitted 4h ago</span></div><button class="review-btn">Review</button></div>
+          <div class="submission"><div class="avatar">RV</div><div class="student-info"><strong>Rohan Verma</strong><span>Python Basics · Submitted yesterday</span></div><button class="review-btn">Review</button></div>
+          <div class="submission"><div class="avatar">MS</div><div class="student-info"><strong>Meera Singh</strong><span>Network Report · Submitted yesterday</span></div><button class="review-btn">Review</button></div>
+        </div>
+        <div class="progress-wrap" id="students">
+          <div class="progress-head"><strong>Class submission progress</strong><span>72%</span></div>
+          <div class="progress-track"><div class="progress-bar"></div></div>
+          <p class="muted" style="margin-top:9px">Most students have submitted their current coursework.</p>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+<script>
+  const searchInput = document.getElementById('searchInput');
+  const rows = [...document.querySelectorAll('#assignmentList tr')];
+  const filterButtons = [...document.querySelectorAll('.filter-btn')];
+  let currentFilter = 'all';
+
+  function filterAssignments() {
+    const query = searchInput.value.trim().toLowerCase();
+    let visible = 0;
+    rows.forEach(row => {
+      const matchesText = row.textContent.toLowerCase().includes(query);
+      const matchesFilter = currentFilter === 'all' || row.dataset.status === currentFilter;
+      row.style.display = matchesText && matchesFilter ? '' : 'none';
+      if (matchesText && matchesFilter) visible++;
+    });
+    document.getElementById('emptyMessage').style.display = visible ? 'none' : 'block';
+  }
+  searchInput.addEventListener('input', filterAssignments);
+  filterButtons.forEach(button => button.addEventListener('click', () => {
+    currentFilter = button.dataset.filter;
+    filterButtons.forEach(item => item.classList.toggle('active', item === button));
+    filterAssignments();
+  }));
+  document.getElementById('viewAllBtn').addEventListener('click', () => {
+    currentFilter = 'all';
+    searchInput.value = '';
+    filterButtons.forEach(item => item.classList.toggle('active', item.dataset.filter === 'all'));
+    filterAssignments();
+  });
+  function showNotice(message) {
+    const notice = document.getElementById('notice');
+    notice.textContent = message;
+    notice.style.display = 'block';
+    notice.scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+  document.getElementById('createBtn').addEventListener('click', () => {
+    const title = prompt('Enter the assignment title (demo only):');
+    if (title && title.trim()) showNotice('Demo only: "' + title.trim() + '" is ready to be connected to an assignment creation form.');
+  });
+  document.querySelectorAll('.review-assignment').forEach(button => button.addEventListener('click', () => {
+    const row = button.closest('tr');
+    showNotice('Demo only: opening details for "' + row.querySelector('.assignment-name').textContent + '". Submission files and grading are not connected yet.');
+  }));
+  document.querySelectorAll('.review-btn').forEach(button => button.addEventListener('click', () => {
+    const name = button.parentElement.querySelector('.student-info strong').textContent;
+    showNotice('Demo only: review panel for ' + name + ' is not connected yet.');
+  }));
+</script>
+</body>
+</html>

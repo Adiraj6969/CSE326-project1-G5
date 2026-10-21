@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="loginpagestyle.css">
+</head>
+<body>
+
+    <div class="login-card">
+        <div class="login-icon">✦</div>
+
+        <h1>Welcome Back!</h1>
+        <p class="subtitle">Sign in to access your portal.</p>
+
+        <form id="loginForm">
+
+            <label for="ID">Enter Your ID</label>
+            <input
+                type="number"
+                id="ID"
+                placeholder="e.g. 12345678"
+                required
+            >
+
+            <label for="password">Enter Password</label>
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+                required
+            >
+
+            <div class="role">Select Your Role</div>
+
+            <input type="radio" id="student"
+                   name="role" value="student" required>
+            <label for="student">Student</label>
+
+            <input type="radio" id="teacher"
+                   name="role" value="teacher">
+            <label for="teacher">Teacher</label>
+
+            <input type="radio" id="developer"
+                   name="role" value="developer">
+            <label for="developer">Developer</label>
+
+            <button type="submit" id="button">
+                SIGN IN →
+            </button>
+
+            <p id="errorMessage" role="alert"></p>
+
+        </form>
+
+        <p class="footer-text">
+            Your learning journey starts here.
+        </p>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById("loginForm");
+        const errorMessage = document.getElementById("errorMessage");
+
+        loginForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const userID = document.getElementById("ID").value;
+            const password = document.getElementById("password").value;
+            const selectedRole = document.querySelector(
+                'input[name="role"]:checked'
+            );
+
+            if (!selectedRole) {
+                errorMessage.textContent = "Please select your role.";
+                return;
+            }
+
+            if (!userID || !password) {
+                errorMessage.textContent = "Please enter your ID and password.";
+                return;
+            }
+
+            const role = selectedRole.value;
+
+            if (role === "student") {
+                window.location.href = "studentscomplete.html";
+            }
+            else if (role === "teacher") {
+                window.location.href = "teacher.html";
+            }
+            else if (role === "developer") {
+                window.location.href = "developers.html";
+            }
+        });
+    </script>
+
+</body>
+</html>
