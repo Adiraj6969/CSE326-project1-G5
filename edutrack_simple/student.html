@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduTrack - Assignment Submission</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .assignment-list {
+            margin: 28px 0;
+            padding: 24px;
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
+        }
+        .assignment-list h2 {
+            margin: 0 0 8px;
+        }
+        .table-note {
+            margin: 0 0 16px;
+            color: #666;
+            font-size: 0.92rem;
+        }
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+        }
+        .assignment-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+        .assignment-table th,
+        .assignment-table td {
+            padding: 13px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e8e8e8;
+        }
+        .assignment-table th {
+            background: #830000;
+            color: #fff;
+            font-weight: 600;
+        }
+        .assignment-table tbody tr:hover {
+            background: #fff5f5;
+        }
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+        .status.pending {
+            color: #8a4b00;
+            background: #fff0d6;
+        }
+        .status.upcoming {
+            color: #174b80;
+            background: #e5f1ff;
+        }
+        @media (max-width: 600px) {
+            .assignment-list {
+                padding: 16px;
+            }
+        }
+    </style>
+
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="brand">EduTrack</div>
+        <p>Student Assignment Portal</p>
+    </header>
+
+    <main class="container">
+        <div class="page-heading">
+            <p class="small-heading">STUDENT PORTAL</p>
+            <h1>Assignment Submission</h1>
+            <p>Enter your details and assignment information below.</p>
+        </div>
+
+
+        <section class="assignment-list">
+            <h2>Upcoming Assignments &amp; Deadlines</h2>
+            <p class="table-note">Sample assignment data for demonstration. Update the names and dates according to your actual class schedule.</p>
+
+            <div class="table-wrapper">
+                <table class="assignment-table">
+                    <thead>
+                        <tr>
+                            <th>Course</th>
+                            <th>Assignment</th>
+                            <th>Deadline</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>INT108</td>
+                            <td>HTML &amp; CSS Practical</td>
+                            <td>25 Nov 2026, 11:59 PM</td>
+                            <td><span class="status pending">Pending</span></td>
+                        </tr>
+                        <tr>
+                            <td>CSE326</td>
+                            <td>JavaScript Basics</td>
+                            <td>28 Nov 2026, 11:59 PM</td>
+                            <td><span class="status pending">Pending</span></td>
+                        </tr>
+                        <tr>
+                            <td>CSE335</td>
+                            <td>Internet Programming Task</td>
+                            <td>02 Dec 2026, 11:59 PM</td>
+                            <td><span class="status upcoming">Upcoming</span></td>
+                        </tr>
+                        <tr>
+                            <td>MTH165</td>
+                            <td>Problem-Solving Worksheet</td>
+                            <td>05 Dec 2026, 11:59 PM</td>
+                            <td><span class="status upcoming">Upcoming</span></td>
+                        </tr>
+                        <tr>
+                            <td>MEC136</td>
+                            <td>Design Thinking Report</td>
+                            <td>08 Dec 2026, 11:59 PM</td>
+                            <td><span class="status upcoming">Upcoming</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="form-card">
+            <form onsubmit="window.location.href='success.html'; return false;">
+
+                <h2>Student Details</h2>
+
+                <label for="student-name">Name</label>
+                <input type="text" id="student-name" name="studentName"
+                       placeholder="Enter your name" required>
+
+                <label for="roll-number">Roll Number</label>
+                <input type="text" id="roll-number" name="rollNumber"
+                       placeholder="Enter your roll number" required>
+
+                <label for="section">Section</label>
+                <input type="text" id="section" name="section"
+                       placeholder="Example: K4P26VW" required>
+
+                <label for="course">Select Your Course</label>
+                <select id="course" name="course" required>
+                    <option value="" selected disabled>Choose your course</option>
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="AI and ML">AI / ML</option>
+                    <option value="Information Technology">Information Technology</option>
+                </select>
+
+                <hr>
+                <h2>Assignment Details</h2>
+
+                <label for="subject">Select Subject</label>
+                <select id="subject" name="subject" required>
+                    <option value="" selected disabled>Select a subject</option>
+                    <option value="INT108">INT108</option>
+                    <option value="CSE326">CSE326</option>
+                    <option value="CSE335">CSE335</option>
+                    <option value="MTH165">MTH165</option>
+                    <option value="MEC136">MEC136</option>
+                    <option value="CSE111">CSE111</option>
+                </select>
+
+                <label for="teacher">Select Teacher</label>
+                <select id="teacher" name="teacher" required>
+                    <option value="" selected disabled>Choose your teacher</option>
+                    <option value="Dr. Kwal Krishan">CSE111 - Dr. Kwal Krishan</option>
+                    <option value="Dr. Shilpa Sharma">CSE326 - Dr. Shilpa Sharma</option>
+                    <option value="Parminder Singh">INT108 - Parminder Singh</option>
+                    <option value="Disha Maity">CSE335 - Disha Maity</option>
+                    <option value="Dr. Rahul Sharma">MEC136 - Dr. Rahul Sharma</option>
+                    <option value="Deepak Kumar">MTH165 - Deepak Kumar</option>
+                </select>
+
+                <label for="assignment-name">Assignment Name</label>
+                <input type="text" id="assignment-name" name="assignmentName"
+                       placeholder="Enter the assignment name" required>
+
+                <label for="due-date">Submission Date</label>
+                <input type="date" id="due-date" name="submissionDate" required>
+
+                <label for="due-time">Submission Time</label>
+                <input type="time" id="due-time" name="submissionTime" required>
+
+                <label for="assignment-file">Choose Assignment File</label>
+                <input type="file" id="assignment-file" name="assignmentFile" required>
+                <p class="file-note">Demo project: the file is selected in your browser, but is not stored on a server.</p>
+
+                <button type="submit">Submit Assignment</button>
+            </form>
+        </section>
+
+        <p class="footer-text">EduTrack · Simple Assignment Submission Project</p>
+    </main>
+
+</body>
+</html>

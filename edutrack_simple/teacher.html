@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduTrack - Teacher Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="brand">EduTrack</div>
+        <p>Teacher Assignment Portal</p>
+        <nav class="portal-nav">
+            <a href="student.html">Student</a>
+            <a href="teacher.html">Teacher</a>
+            <a href="developer.html">Developer</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="page-heading">
+            <p class="small-heading">TEACHER PORTAL</p>
+            <h1>Create Assignment</h1>
+            <p>Enter your details and provide the assignment information.</p>
+        </div>
+
+        <section class="form-card">
+            <form onsubmit="window.location.href='teacher-success.html'; return false;">
+                <h2>Teacher Details</h2>
+
+                <label for="teacher-name">Teacher Name</label>
+                <input type="text" id="teacher-name" name="teacherName" placeholder="Enter your name" required>
+
+                <label for="teacher-id">Teacher ID</label>
+                <input type="text" id="teacher-id" name="teacherId" placeholder="Enter your teacher ID" required>
+
+                <label for="department">Department</label>
+                <select id="department" name="department" required>
+                    <option value="" selected disabled>Select your department</option>
+                    <option>Computer Science</option>
+                    <option>Electronics</option>
+                    <option>Mathematics</option>
+                    <option>Mechanical Engineering</option>
+                    <option>Other</option>
+                </select>
+
+                <hr>
+                <h2>Assignment Details</h2>
+
+                <label for="subject">Select Subject</label>
+                <select id="subject" name="subject" required>
+                    <option value="" selected disabled>Select a subject</option>
+                    <option>INT108</option>
+                    <option>CSE326</option>
+                    <option>CSE335</option>
+                    <option>MTH165</option>
+                    <option>MEC136</option>
+                    <option>CSE111</option>
+                </select>
+
+                <label for="assignment-title">Assignment Title</label>
+                <input type="text" id="assignment-title" name="assignmentTitle" placeholder="Enter assignment title" required>
+
+                <label for="instructions">Assignment Instructions</label>
+                <textarea id="instructions" name="instructions" rows="4" placeholder="Write a few instructions for students" required></textarea>
+
+                <label for="due-date">Due Date</label>
+                <input type="date" id="due-date" name="dueDate" required>
+
+                <label for="due-time">Due Time</label>
+                <input type="time" id="due-time" name="dueTime" required>
+
+                <label for="marks">Maximum Marks</label>
+                <input type="number" id="marks" name="marks" min="1" placeholder="Example: 20" required>
+
+                <button type="submit">Create Assignment</button>
+            </form>
+        </section>
+        <p class="footer-text">EduTrack · Simple Teacher Portal</p>
+    </main>
+</body>
+</html>

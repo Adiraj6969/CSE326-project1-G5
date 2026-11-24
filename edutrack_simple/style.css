@@ -1,0 +1,347 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
+/* ===== SAME DESIGN LANGUAGE AS THE LOGIN PAGE ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --mint: #CAF4F4;
+    --cream: #FCFFE9;
+    --yellow: #FFF2CC;
+    --pink: #FDE0D9;
+    --green: #CAEFD1;
+    --teal: #527D75;
+    --dark-teal: #315B58;
+    --text: #405A53;
+    --muted: #7B8982;
+    --border: #D8E7D9;
+    --white: #FFFFFF;
+}
+
+/* ===== PAGE BACKGROUND ===== */
+body {
+    min-height: 100vh;
+    padding: 35px 18px 28px;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background:
+        radial-gradient(circle at 10% 12%, var(--pink), transparent 30%),
+        radial-gradient(circle at 90% 88%, var(--green), transparent 30%),
+        var(--mint);
+}
+
+/* ===== HEADER ===== */
+.site-header {
+    width: min(100%, 1000px);
+    margin: 0 auto 28px;
+    padding: 22px 28px;
+    text-align: center;
+    background: rgba(252, 255, 233, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    border-radius: 22px;
+    box-shadow: 0 12px 35px rgba(49, 91, 88, 0.10);
+}
+
+.brand {
+    color: var(--dark-teal);
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+.site-header > p {
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* ===== PORTAL NAVIGATION ===== */
+.portal-nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.portal-nav a {
+    padding: 9px 17px;
+    color: var(--teal);
+    background: #FFFFFF;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    transition: 0.25s ease;
+}
+
+.portal-nav a:hover {
+    color: var(--cream);
+    background: var(--teal);
+    border-color: var(--teal);
+    transform: translateY(-2px);
+}
+
+/* ===== MAIN CONTENT ===== */
+.container {
+    width: min(100%, 760px);
+    margin: 0 auto;
+}
+
+/* ===== PAGE TITLE ===== */
+.page-heading {
+    margin: 0 auto 22px;
+    text-align: center;
+}
+
+.small-heading {
+    margin-bottom: 8px;
+    color: var(--teal);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+h1 {
+    margin-bottom: 10px;
+    color: var(--dark-teal);
+    font-family: 'Playfair Display', serif;
+    font-size: 34px;
+    line-height: 1.25;
+    text-align: center;
+}
+
+.page-heading > p:last-child {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* ===== FORM AND SUCCESS CARDS ===== */
+.form-card,
+.success-card {
+    width: 100%;
+    padding: 36px 40px;
+    background: var(--cream);
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    border-radius: 26px;
+    box-shadow: 0 20px 55px rgba(49, 91, 88, 0.15);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form h2 {
+    margin: 5px 0 20px;
+    color: var(--dark-teal);
+    font-family: 'Playfair Display', serif;
+    font-size: 21px;
+}
+
+form hr {
+    width: 100%;
+    margin: 10px 0 25px;
+    border: 0;
+    border-top: 1px solid #E5EBDC;
+}
+
+/* ===== FORM LABELS ===== */
+form label {
+    margin: 0 0 9px;
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+/* ===== FORM FIELDS ===== */
+input:not([type="radio"]),
+select,
+textarea {
+    width: 100%;
+    min-height: 50px;
+    margin: 0 0 21px;
+    padding: 12px 15px;
+    color: var(--dark-teal);
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    outline: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    transition: 0.25s ease;
+}
+
+textarea {
+    min-height: 110px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #A3ADA6;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #6AB9B1;
+    box-shadow: 0 0 0 4px rgba(202, 244, 244, 0.8);
+}
+
+input[type="file"] {
+    padding: 10px;
+    color: var(--muted);
+}
+
+input[type="file"]::file-selector-button {
+    margin-right: 12px;
+    padding: 8px 12px;
+    color: var(--dark-teal);
+    background: var(--green);
+    border: 0;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.file-note {
+    margin: -10px 0 20px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+/* ===== BUTTONS ===== */
+button,
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 53px;
+    margin-top: 8px;
+    padding: 13px 18px;
+    color: var(--cream);
+    background: var(--teal);
+    border: 0;
+    border-radius: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 7px 15px rgba(82, 125, 117, 0.20);
+    transition: 0.25s ease;
+}
+
+button:hover,
+.back-button:hover {
+    color: var(--cream);
+    background: var(--dark-teal);
+    box-shadow: 0 10px 20px rgba(49, 91, 88, 0.22);
+    transform: translateY(-2px);
+}
+
+button:active,
+.back-button:active {
+    transform: scale(0.99);
+}
+
+/* ===== SUCCESS PAGE ===== */
+.success-card {
+    max-width: 620px;
+    margin: 35px auto 0;
+    text-align: center;
+}
+
+.success-symbol {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 62px;
+    height: 62px;
+    margin: 0 auto 20px;
+    color: var(--teal);
+    background: var(--pink);
+    border-radius: 20px;
+    font-size: 32px;
+    font-weight: 700;
+    box-shadow: 0 5px 15px rgba(253, 224, 217, 0.7);
+}
+
+.success-card p {
+    margin: 12px 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.success-card .back-button {
+    margin-top: 18px;
+}
+
+.text-link {
+    display: inline-block;
+    margin-top: 18px;
+    color: var(--teal);
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.text-link:hover {
+    color: var(--dark-teal);
+    text-decoration: underline;
+}
+
+/* ===== FOOTER ===== */
+.footer-text {
+    margin: 24px auto 0;
+    padding-top: 18px;
+    color: #929D93;
+    border-top: 1px solid rgba(229, 235, 220, 0.9);
+    font-size: 12px;
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 600px) {
+    body {
+        padding: 22px 13px;
+    }
+
+    .site-header {
+        padding: 19px 16px;
+        border-radius: 19px;
+    }
+
+    .brand {
+        font-size: 26px;
+    }
+
+    .form-card,
+    .success-card {
+        padding: 28px 22px;
+        border-radius: 22px;
+    }
+
+    h1 {
+        font-size: 29px;
+    }
+
+    form h2 {
+        font-size: 19px;
+    }
+}

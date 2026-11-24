@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduTrack - Developer Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="brand">EduTrack</div>
+        <p>Developer Workspace</p>
+        <nav class="portal-nav">
+            <a href="student.html">Student</a>
+            <a href="teacher.html">Teacher</a>
+            <a href="developer.html">Developer</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="page-heading">
+            <p class="small-heading">DEVELOPER PORTAL</p>
+            <h1>Project Update</h1>
+            <p>Enter your details and share a basic project update.</p>
+        </div>
+
+        <section class="form-card">
+            <form onsubmit="window.location.href='developer-success.html'; return false;">
+                <h2>Developer Details</h2>
+
+                <label for="developer-name">Developer Name</label>
+                <input type="text" id="developer-name" name="developerName" placeholder="Enter your name" required>
+
+                <label for="developer-id">Developer ID</label>
+                <input type="text" id="developer-id" name="developerId" placeholder="Enter your developer ID" required>
+
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+                <hr>
+                <h2>Project Details</h2>
+
+                <label for="project-name">Project Name</label>
+                <input type="text" id="project-name" name="projectName" placeholder="Enter project name" required>
+
+                <label for="project-type">Project Type</label>
+                <select id="project-type" name="projectType" required>
+                    <option value="" selected disabled>Select project type</option>
+                    <option>Website</option>
+                    <option>Web Application</option>
+                    <option>College Project</option>
+                    <option>Other</option>
+                </select>
+
+                <label for="status">Project Status</label>
+                <select id="status" name="status" required>
+                    <option value="" selected disabled>Select current status</option>
+                    <option>Not Started</option>
+                    <option>In Progress</option>
+                    <option>Completed</option>
+                </select>
+
+                <label for="update">Project Update</label>
+                <textarea id="update" name="update" rows="4" placeholder="Write a short update about your work" required></textarea>
+
+                <button type="submit">Submit Project Update</button>
+            </form>
+        </section>
+        <p class="footer-text">EduTrack · Simple Developer Portal</p>
+    </main>
+</body>
+</html>
